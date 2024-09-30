@@ -1,0 +1,27 @@
+version: '3.3'
+services:
+  postgresql:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: 'db'        
+      POSTGRES_USER: 'user'
+      POSTGRES_PASSWORD: 'password'
+    ports: 
+      - '5432:5432'
+    volumes:
+      - # Volumes to be mounted in the container, used for data persistence
+
+  flaskapp:
+    image:  # Replace with your Flask app image
+    depends_on:
+      - postgresql
+    environment:
+      DATABASE_HOST: 'postgresql'
+      DATABASE_NAME: 'db'
+      DATABASE_USER: 'user'
+      DATABASE_PASSWORD: 'password'
+    ports: 
+      - '8080:8080'
+
+volumes:
+  # Define named volumes here. These volumes can be used by services for persistent storage
